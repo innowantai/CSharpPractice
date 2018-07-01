@@ -43,32 +43,38 @@ namespace TrangToEnglishSubtitles
             int kk = 0;
             foreach (var ff in data)
             {
+                /// 針對Dialogue開頭之列數檔案處理
                 if (ff.IndexOf("Dialogue") != -1)
                 {
+                    /// 以,,為分隔取出前半段儲存至resStr1
                     int po1 = ff.IndexOf(",,") + 2;
                     string resStr1 = ff.Substring(0, po1);
                     string index = ff.Substring(po1, ff.Length - po1);
+
+                    /// 以{為中英字幕分隔取出後半段英文字幕儲存至resStr2
                     int po2 = index.IndexOf("{");
                     string resStr2 = po2 == -1 ? "" : index.Substring(po2, index.Length - po2);
+
+                    /// 前後半段組合
                     string resStr = resStr1 + resStr2;
 
-
+                    /// 可能有沒英文字幕的情況,此時恢復原本字串
                     if (resStr2 == "")
-                    {
                         resStr = ff;
-                        Console.WriteLine(resStr2);
-                    }
 
-                    int po3 = resStr.IndexOf("fs");
+                    /// 改變字幕文字大小至16單位
+                    int po3 = resStr.IndexOf("\\fs");
                     if (po3 != -1)
                     {
-                        string fsSize = resStr.Substring(po3 , 4);
-                        resStr = resStr.Replace(fsSize, "fs16");
+                        string fsSize = resStr.Substring(po3 , 5);
+                        resStr = resStr.Replace(fsSize, "\\fs16");
 
                     }
 
+                    /// 將換行字符拿掉
                     resStr = resStr.Replace("\\fn", "");
 
+                    ///處理結果儲存
                     data[kk] = resStr;
                 }
                 // Console.WriteLine(data[kk]);

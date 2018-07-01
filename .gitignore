@@ -2,4 +2,5 @@
 *.jpeg
 *.jpg 
 *.vs
+*.ASS
 obj/
