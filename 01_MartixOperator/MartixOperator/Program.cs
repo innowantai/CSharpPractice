@@ -10,7 +10,7 @@ namespace MartixOperator
     {
         double[,] data;
         Matrix Mdata;
-
+         
 
         public Matrix(double[,] array)
         {
@@ -23,8 +23,7 @@ namespace MartixOperator
                 }
             }
 
-        }
-
+        } 
 
         public Matrix Add(Matrix input)
         {
@@ -74,7 +73,7 @@ namespace MartixOperator
             {
                 for (int j = 0; j < input.data.GetLength(1); j++)
                 {
-                    res[i, j] = this.Mdata.GetVector(i, 1).Dot(input.GetVector(j, 0)).Sum();
+                    res[i, j] = this.Mdata.GetVector(i, 1).Dot(input.GetVector(j, 0));
                 }
             }
             return new Matrix(res);
@@ -113,6 +112,68 @@ namespace MartixOperator
             }
         }
 
+
+
+
+
+        /// <summary>
+        /// Use Operator to Control + - *  
+        /// </summary>
+        /// <param name="M1"></param>
+        /// <param name="M2"></param>
+        /// <returns></returns>
+
+        public static Matrix operator +(Matrix M1, Matrix M2)
+        {
+            Matrix M3 = new Matrix(M1.data);
+            for (int i = 0; i < M1.data.GetLength(0); i++)
+            {
+                for (int j = 0; j < M1.data.GetLength(1); j++)
+                {
+                    M3.data[i, j] = M1.data[i, j] + M2.data[i, j];
+                }
+            }
+            return M3;
+        }
+
+        public static Matrix operator -(Matrix M1, Matrix M2)
+        {
+            Matrix M3 = new Matrix(M1.data);
+            for (int i = 0; i < M1.data.GetLength(0); i++)
+            {
+                for (int j = 0; j < M1.data.GetLength(1); j++)
+                {
+                    M3.data[i, j] = M1.data[i, j] - M2.data[i, j];
+                }
+            }
+            return M3;
+        }
+
+
+        public static Matrix operator *(Matrix M1, Matrix M2)
+        {
+            double[,] res = new double[M1.data.GetLength(0),M2.data.GetLength(1)]; 
+            Matrix M3 = new Matrix(res);
+
+            for (int i = 0; i < M1.data.GetLength(0); i++)
+            {
+                for (int j = 0; j < M2.data.GetLength(1); j++)
+                {
+                    M3.data[i, j] = M1.GetVector(i, 1)*M2.GetVector(j, 0);
+                    //M3.data[i, j] = M1.GetVector(i, 1).Dot(M2.GetVector(j, 0));
+                }
+            }
+            return M3;
+        }
+
+        public static bool operator >(Matrix M1, Matrix M2)
+        {
+            return M1 > M2;
+        }
+        public static bool operator <(Matrix M1, Matrix M2)
+        {
+            return M1 < M2;
+        } 
     }
 
 
@@ -141,6 +202,33 @@ namespace MartixOperator
             Console.WriteLine("");
         }
 
+
+        /// <summary>
+        /// Operator Part below
+        /// </summary>
+        /// <param name="V1"></param>
+        /// <param name="V2"></param>
+        /// <returns></returns>
+        public static double operator * (Vector V1,Vector V2)
+        { 
+            double res = 0;
+            for (int i = 0; i < V1.data.GetLength(0); i++)
+                res += V1.data[i] * V2.data[i];  
+
+            return res;
+
+        }
+       
+
+        public static bool operator > (Vector V1, Vector V2)
+        {
+            return V1 > V2;
+        }
+
+        public static bool operator <(Vector V1, Vector V2)
+        {
+            return V1 < V2;
+        } 
     }
 
 
@@ -149,11 +237,10 @@ namespace MartixOperator
         static void Main(string[] args)
         { 
 
-            Matrix matrix1 = new Matrix(new double[,] { { 1, 2, 3 }, { 4, 5, 6 }, { 7, 8, 9 } });
-            Matrix matrix2 = new Matrix(new double[,] { { 4, 5 }, { 4, 5 } });
-            Matrix matrix3 = matrix1.Add(matrix2);
-            Matrix matrix4 = matrix1.Mult(matrix2);
-            matrix3.print();
+            Matrix M1 = new Matrix(new double[,] { { 1, 2, 3 }, { 4, 5, 6 }, { 7, 8, 9 } });
+            Matrix M2 = new Matrix(new double[,] { { 4, 5  }, { 4, 5 }, { 4, 6 } }); 
+            Matrix M5 = M1 * M2; 
+            M5.print();
         }
     }
 }
