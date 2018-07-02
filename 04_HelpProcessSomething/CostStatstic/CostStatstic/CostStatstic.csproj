@@ -49,13 +49,13 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\CsharpPractice\01_MartixOperator\MartixOperator\MartixOperator.csproj">
-      <Project>{fae497c9-1b68-4ea2-a1d1-2e8516bf1ea8}</Project>
-      <Name>MartixOperator</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\ExcelClass\ExcelClass\ExcelClass.csproj">
+    <ProjectReference Include="..\..\..\00_ExcelClass\ExcelClass\ExcelClass.csproj">
       <Project>{10ab60cb-e95c-4b7f-82b8-11305097641f}</Project>
       <Name>ExcelClass</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\01_MartixOperator\MartixOperator\MartixOperator.csproj">
+      <Project>{fae497c9-1b68-4ea2-a1d1-2e8516bf1ea8}</Project>
+      <Name>MartixOperator</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

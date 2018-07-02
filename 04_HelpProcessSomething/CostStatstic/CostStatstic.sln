@@ -5,9 +5,9 @@ VisualStudioVersion = 15.0.27703.2026
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CostStatstic", "CostStatstic\CostStatstic.csproj", "{E126F677-0591-4E36-90AF-B17FDB292114}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExcelClass", "..\ExcelClass\ExcelClass\ExcelClass.csproj", "{10AB60CB-E95C-4B7F-82B8-11305097641F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MartixOperator", "..\..\01_MartixOperator\MartixOperator\MartixOperator.csproj", "{FAE497C9-1B68-4EA2-A1D1-2E8516BF1EA8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MartixOperator", "..\..\CsharpPractice\01_MartixOperator\MartixOperator\MartixOperator.csproj", "{FAE497C9-1B68-4EA2-A1D1-2E8516BF1EA8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExcelClass", "..\..\00_ExcelClass\ExcelClass\ExcelClass.csproj", "{10AB60CB-E95C-4B7F-82B8-11305097641F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,14 +19,14 @@ Global
 		{E126F677-0591-4E36-90AF-B17FDB292114}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E126F677-0591-4E36-90AF-B17FDB292114}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E126F677-0591-4E36-90AF-B17FDB292114}.Release|Any CPU.Build.0 = Release|Any CPU
-		{10AB60CB-E95C-4B7F-82B8-11305097641F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{10AB60CB-E95C-4B7F-82B8-11305097641F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{10AB60CB-E95C-4B7F-82B8-11305097641F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{10AB60CB-E95C-4B7F-82B8-11305097641F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{FAE497C9-1B68-4EA2-A1D1-2E8516BF1EA8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{FAE497C9-1B68-4EA2-A1D1-2E8516BF1EA8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FAE497C9-1B68-4EA2-A1D1-2E8516BF1EA8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FAE497C9-1B68-4EA2-A1D1-2E8516BF1EA8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{10AB60CB-E95C-4B7F-82B8-11305097641F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{10AB60CB-E95C-4B7F-82B8-11305097641F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{10AB60CB-E95C-4B7F-82B8-11305097641F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{10AB60CB-E95C-4B7F-82B8-11305097641F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
