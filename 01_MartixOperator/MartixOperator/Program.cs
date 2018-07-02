@@ -8,9 +8,8 @@ namespace MartixOperator
 {
     class Matrix
     {
-        double[,] data;
-        Matrix Mdata;
-         
+        private double[,] data;
+        public double[,] Data { get { return data; } }
 
         public Matrix(double[,] array)
         {
@@ -22,63 +21,12 @@ namespace MartixOperator
                     data[i, j] = array[i, j];
                 }
             }
-
-        } 
-
-        public Matrix Add(Matrix input)
-        {
-            /// 矩陣大小不同 回傳-1
-            if (this.data.Length != input.data.Length)
-                return new Matrix(new double[,] { { -1 } });
-
-            Matrix res = new Matrix(input.data);
-            for (int i = 0; i < input.data.GetLength(0); i++)
-            {
-                for (int j = 0; j < input.data.GetLength(1); j++)
-                {
-                    res.data[i, j] = this.data[i, j] + input.data[i, j];
-                }
-            }
-            return res;
         }
 
-        public Matrix Minus(Matrix input)
-        {
-
-            /// 矩陣大小不同 回傳-1
-            if (this.data.Length != input.data.Length)
-                return new Matrix(new double[,] { { -1 } });
-
-            Matrix res = new Matrix(input.data);
-            for (int i = 0; i < input.data.GetLength(0); i++)
-            {
-                for (int j = 0; j < input.data.GetLength(1); j++)
-                {
-                    res.data[i, j] = this.data[i, j] - input.data[i, j];
-                }
-            }
-            return res;
-        }
-
-        public Matrix Mult(Matrix input)
-        {
-
-            /// 矩陣大小不合法無法相乘時候回傳-1
-            if (this.data.GetLength(1) != input.data.GetLength(0))
-                return new Matrix(new double[,] { { -1 } });
-
-            double[,] res = new double[this.data.GetLength(0), input.data.GetLength(1)];
-            this.Mdata = new Matrix(this.data);
-            for (int i = 0; i < this.data.GetLength(0); i++)
-            {
-                for (int j = 0; j < input.data.GetLength(1); j++)
-                {
-                    res[i, j] = this.Mdata.GetVector(i, 1).Dot(input.GetVector(j, 0));
-                }
-            }
-            return new Matrix(res);
-        }
-
+        /// <summary>
+        /// 轉置
+        /// </summary>
+        /// <returns></returns>
         public Matrix Tran()
         {
             Matrix res = new Matrix(this.data);
@@ -92,7 +40,12 @@ namespace MartixOperator
             return res;
         }
 
-
+        /// <summary>
+        /// 取得某一行或某一列向量
+        /// </summary>
+        /// <param name="pos"></param>       空置位置
+        /// <param name="ColorRow"></param>  空置行或列
+        /// <returns></returns>
         public Vector GetVector(int pos = 0, int ColorRow = 0)
         {
             double[] res = new double[this.data.GetLength(ColorRow)];
@@ -102,7 +55,10 @@ namespace MartixOperator
 
         }
 
-        public void print()
+        /// <summary>
+        /// 打印
+        /// </summary>
+        public void Print()
         {
             for (int i = 0; i < this.data.GetLength(0); i++)
             {
@@ -110,19 +66,15 @@ namespace MartixOperator
                     Console.Write(this.data[i, j] + " ");
                 Console.WriteLine("");
             }
-        }
-
-
-
+        }        
 
 
         /// <summary>
-        /// Use Operator to Control + - *  
+        /// 使用operator實現矩陣+ - * 
         /// </summary>
         /// <param name="M1"></param>
         /// <param name="M2"></param>
         /// <returns></returns>
-
         public static Matrix operator +(Matrix M1, Matrix M2)
         {
             Matrix M3 = new Matrix(M1.data);
@@ -135,7 +87,6 @@ namespace MartixOperator
             }
             return M3;
         }
-
         public static Matrix operator -(Matrix M1, Matrix M2)
         {
             Matrix M3 = new Matrix(M1.data);
@@ -147,39 +98,31 @@ namespace MartixOperator
                 }
             }
             return M3;
-        }
-
-
+        }        
         public static Matrix operator *(Matrix M1, Matrix M2)
         {
-            double[,] res = new double[M1.data.GetLength(0),M2.data.GetLength(1)]; 
+            double[,] res = new double[M1.data.GetLength(0), M2.data.GetLength(1)];
             Matrix M3 = new Matrix(res);
 
             for (int i = 0; i < M1.data.GetLength(0); i++)
             {
                 for (int j = 0; j < M2.data.GetLength(1); j++)
                 {
-                    M3.data[i, j] = M1.GetVector(i, 1)*M2.GetVector(j, 0);
+                    M3.data[i, j] = M1.GetVector(i, 1) * M2.GetVector(j, 0);
                     //M3.data[i, j] = M1.GetVector(i, 1).Dot(M2.GetVector(j, 0));
                 }
             }
             return M3;
         }
-
-        public static bool operator >(Matrix M1, Matrix M2)
-        {
-            return M1 > M2;
-        }
-        public static bool operator <(Matrix M1, Matrix M2)
-        {
-            return M1 < M2;
-        } 
+        public static bool operator >(Matrix M1, Matrix M2)  {    return M1 > M2;  }
+        public static bool operator <(Matrix M1, Matrix M2)  {    return M1 < M2;  }
     }
 
 
     class Vector
     {
-        double[] data;
+        private double[] data;
+        public double[] Data { get { return data; } }
         public Vector(double[] array)
         {
             data = new double[array.GetLength(0)];
@@ -187,13 +130,43 @@ namespace MartixOperator
                 data[i] = array[i];
         }
 
-        public double Dot(Vector input)
+
+        /// <summary>
+        /// 找出指定數字於向量中的位置，若不存在返回-1
+        /// </summary>
+        /// <param name="res"></param>
+        /// <returns></returns>
+        public int Find(double res)
+        {
+            int po = 0;
+            foreach (double dd in this.data)
+            {
+                if (dd == res)
+                    return po;
+                po++;
+            }
+            return -1;
+        }
+
+        /// <summary>
+        /// 使用operator實現向量內積
+        /// </summary>
+        /// <param name="V1"></param>
+        /// <param name="V2"></param>
+        /// <returns></returns>
+        public static double operator *(Vector V1, Vector V2)
         {
             double res = 0;
-            for (int i = 0; i < input.data.GetLength(0); i++)
-                res += input.data[i] * this.data[i];
+            for (int i = 0; i < V1.data.GetLength(0); i++)
+                res += V1.data[i] * V2.data[i];
             return res;
         } 
+        public static bool operator >(Vector V1, Vector V2)  {    return V1 > V2;  }
+        public static bool operator <(Vector V1, Vector V2)  {    return V1 < V2;  }
+
+        /// <summary>
+        /// 打印
+        /// </summary>
         public void Print()
         {
 
@@ -201,46 +174,180 @@ namespace MartixOperator
                 Console.Write(this.data[i] + " ");
             Console.WriteLine("");
         }
+    }
 
+
+    /// <summary>
+    /// 字串形式的矩陣
+    /// </summary>
+    class MatrixS
+    {
+        private string[,] data;
+        public string[,] Data { get { return data; } }
+
+        public MatrixS(string[,] array)
+        {
+            data = new string[array.GetLength(0), array.GetLength(1)];
+            for (int i = 0; i < array.GetLength(0); i++)
+            {
+                for (int j = 0; j < array.GetLength(1); j++)
+                {
+                    data[i, j] = array[i, j];
+                }
+            }
+        }
 
         /// <summary>
-        /// Operator Part below
+        /// 取的某一行或某一列之字串向量
         /// </summary>
-        /// <param name="V1"></param>
-        /// <param name="V2"></param>
+        /// <param name="pos"></param>       控制位置
+        /// <param name="ColorRow"></param>  控制行或列
         /// <returns></returns>
-        public static double operator * (Vector V1,Vector V2)
-        { 
-            double res = 0;
-            for (int i = 0; i < V1.data.GetLength(0); i++)
-                res += V1.data[i] * V2.data[i];  
-
-            return res;
+        public VectorS GetVector(int pos = 0, int ColorRow = 0)
+        {
+            string[] res = new string[this.data.GetLength(ColorRow)];
+            for (int i = 0; i < this.data.GetLength(ColorRow); i++)
+                res[i] = ColorRow == 0 ? this.data[i, pos] : this.data[pos, i];
+            return new VectorS(res);
 
         }
-       
-
-        public static bool operator > (Vector V1, Vector V2)
+        /// <summary>
+        /// 打印
+        /// </summary>
+        public void Print()
         {
-            return V1 > V2;
+            for (int i = 0; i < this.data.GetLength(0); i++)
+            {
+                for (int j = 0; j < this.data.GetLength(1); j++)
+                    Console.Write(this.data[i, j] + " ");
+                Console.WriteLine("");
+            }
         }
-
-        public static bool operator <(Vector V1, Vector V2)
-        {
-            return V1 < V2;
-        } 
     }
+
+    /// <summary>
+    /// 字串形式的向量
+    /// </summary>
+    class VectorS
+    {
+        private string[] data;
+        public string[] Data { get { return data; } }
+        public VectorS(string[] array)
+        {
+            data = new string[array.GetLength(0)];
+            for (int i = 0; i < array.GetLength(0); i++)
+                data[i] = array[i];
+        }
+
+        /// <summary>
+        /// 找出指定字串於向量中的位置，若不存在返回-1
+        /// </summary>
+        /// <param name="res"></param>
+        /// <returns></returns>
+        public int Find(string res)
+        {
+            int po = 0;
+            foreach (string ff in this.data)
+            {
+                if (ff == res)
+                    return po;
+                po++;
+            }
+            return -1; 
+        } 
+
+        /// <summary>
+        /// 打印
+        /// </summary>
+        public void Print()
+        {
+
+            for (int i = 0; i < this.data.GetLength(0); i++)
+                Console.Write(this.data[i] + " ");
+            Console.WriteLine("");
+        }
+    }
+
+
+     
+
 
 
     class Program
     {
         static void Main(string[] args)
-        { 
+        {
 
-            Matrix M1 = new Matrix(new double[,] { { 1, 2, 3 }, { 4, 5, 6 }, { 7, 8, 9 } });
-            Matrix M2 = new Matrix(new double[,] { { 4, 5  }, { 4, 5 }, { 4, 6 } }); 
-            Matrix M5 = M1 * M2; 
-            M5.print();
+
+            MatrixS m1 = new MatrixS(new string[,] { { "1", "2", "3" }, { "4", "5", "6" }, { "1asdasd1", "12", "13" } });
+            Matrix m = new Matrix(new double[,] { { 1, 2, 3 }, { 1, 2, 3 }, { 1, 2, 3 } });
+            VectorS s1 = m1.GetVector(1, 0);
+
+            string ss = "11111,22222,33333,4,5,6,7,8,9,0";
+            string[] sr = ss.Split(',');
+            VectorS vs = new VectorS(sr);
+            string[] sq = vs.Data;
+            Console.WriteLine(vs.Find("9")) ;
+            
+
         }
     }
 }
+
+
+
+
+
+//public Matrix Add(Matrix input)
+//{
+//    /// 矩陣大小不同 回傳-1
+//    if (this.data.Length != input.data.Length)
+//        return new Matrix(new double[,] { { -1 } });
+
+//    Matrix res = new Matrix(input.data);
+//    for (int i = 0; i < input.data.GetLength(0); i++)
+//    {
+//        for (int j = 0; j < input.data.GetLength(1); j++)
+//        {
+//            res.data[i, j] = this.data[i, j] + input.data[i, j];
+//        }
+//    }
+//    return res;
+//}
+
+//public Matrix Minus(Matrix input)
+//{
+
+//    /// 矩陣大小不同 回傳-1
+//    if (this.data.Length != input.data.Length)
+//        return new Matrix(new double[,] { { -1 } });
+
+//    Matrix res = new Matrix(input.data);
+//    for (int i = 0; i < input.data.GetLength(0); i++)
+//    {
+//        for (int j = 0; j < input.data.GetLength(1); j++)
+//        {
+//            res.data[i, j] = this.data[i, j] - input.data[i, j];
+//        }
+//    }
+//    return res;
+//}
+
+//public Matrix Mult(Matrix input)
+//{
+
+//    /// 矩陣大小不合法無法相乘時候回傳-1
+//    if (this.data.GetLength(1) != input.data.GetLength(0))
+//        return new Matrix(new double[,] { { -1 } });
+
+//    double[,] res = new double[this.data.GetLength(0), input.data.GetLength(1)];
+//    this.Mdata = new Matrix(this.data);
+//    for (int i = 0; i < this.data.GetLength(0); i++)
+//    {
+//        for (int j = 0; j < input.data.GetLength(1); j++)
+//        {
+//            res[i, j] = this.Mdata.GetVector(i, 1).Dot(input.GetVector(j, 0));
+//        }
+//    }
+//    return new Matrix(res);
+//}
