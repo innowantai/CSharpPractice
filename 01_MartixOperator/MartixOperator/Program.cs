@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MartixOperator
 {
-    class Matrix
+    public class Matrix
     {
         private double[,] data;
         public double[,] Data { get { return data; } }
@@ -119,7 +119,7 @@ namespace MartixOperator
     }
 
 
-    class Vector
+    public class Vector
     {
         private double[] data;
         public double[] Data { get { return data; } }
@@ -180,7 +180,7 @@ namespace MartixOperator
     /// <summary>
     /// 字串形式的矩陣
     /// </summary>
-    class MatrixS
+    public class MatrixS
     {
         private string[,] data;
         public string[,] Data { get { return data; } }
@@ -228,7 +228,7 @@ namespace MartixOperator
     /// <summary>
     /// 字串形式的向量
     /// </summary>
-    class VectorS
+    public class VectorS
     {
         private string[] data;
         public string[] Data { get { return data; } }
