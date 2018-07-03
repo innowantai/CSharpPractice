@@ -149,6 +149,26 @@ namespace MartixOperator
         }
 
         /// <summary>
+        /// 找出向量中，所有等於res之位置
+        /// </summary>
+        /// <param name="res"></param>
+        /// <returns></returns>
+        public double[] FindArray(double res)
+        {
+            List<double> RES = new List<double>();
+            double po = 0;
+            foreach (double dd in this.data)
+            {
+                if (dd == res)
+                    RES.Add(po);
+                po++;
+            }
+            if (RES.ToArray().GetLength(0) == 0)
+                return null;
+            return RES.ToArray(); 
+        }
+
+        /// <summary>
         /// 求出向量總和
         /// </summary>
         /// <returns></returns>
@@ -327,11 +347,11 @@ namespace MartixOperator
             Matrix m = new Matrix(new double[,] { { 1, 2, 3 }, { 1, 2, 3 }, { 1, 2, 3 } });
             VectorS s1 = m1.GetVector(1, 0);
 
-            string ss = "11111,22222,33333,4,5,6,7,8,9,0";
-            string[] sr = ss.Split(',');
-            VectorS vs = new VectorS(sr);
-            string[] sq = vs.Data;
-            Console.WriteLine(vs.Find("9")) ;
+
+            double[] dd = new double[] { 1,2,5,123,1,5,123,321,3,31,1};
+            Vector vv = new Vector(dd);
+            Vector po = new Vector(vv.FindArray(1));
+            po.Print();
             
 
         }
