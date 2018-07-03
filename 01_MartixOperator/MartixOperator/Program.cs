@@ -337,7 +337,7 @@ namespace MartixOperator
             }
             if (RES.ToArray().GetLength(0) == 0)
                 return null;
-            return RES.ToArray();
+            return RES.ToArray(); 
         }
 
         /// <summary>
