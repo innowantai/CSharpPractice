@@ -149,6 +149,20 @@ namespace MartixOperator
         }
 
         /// <summary>
+        /// 求出向量總和
+        /// </summary>
+        /// <returns></returns>
+        public double Sum()
+        {
+            double res = 0;
+            foreach (double dd in this.data)
+            {
+                res += dd;
+            }
+            return res;
+        }
+
+        /// <summary>
         /// 使用operator實現向量內積
         /// </summary>
         /// <param name="V1"></param>
@@ -160,7 +174,37 @@ namespace MartixOperator
             for (int i = 0; i < V1.data.GetLength(0); i++)
                 res += V1.data[i] * V2.data[i];
             return res;
-        } 
+        }
+
+        /// <summary>
+        /// 使用operator實現向量相加
+        /// </summary>
+        /// <param name="V1"></param>
+        /// <param name="V2"></param>
+        /// <returns></returns>
+        public static Vector operator + (Vector V1, Vector V2)
+        {
+            Vector res = new Vector(new double[V1.data.GetLength(0)]);
+            for (int i = 0; i < V1.data.GetLength(0); i++)
+                res.data[i] = V1.data[i] + V2.data[i];
+            return res;
+        }
+
+        /// <summary>
+        /// 使用operator實現向量相減
+        /// </summary>
+        /// <param name="V1"></param>
+        /// <param name="V2"></param>
+        /// <returns></returns>
+        public static Vector operator -(Vector V1, Vector V2)
+        {
+            Vector res = new Vector(new double[V1.data.GetLength(0)]);
+            for (int i = 0; i < V1.data.GetLength(0); i++)
+                res.data[i] = V1.data[i] - V2.data[i];
+            return res;
+        }
+
+
         public static bool operator >(Vector V1, Vector V2)  {    return V1 > V2;  }
         public static bool operator <(Vector V1, Vector V2)  {    return V1 < V2;  }
 
