@@ -318,7 +318,27 @@ namespace MartixOperator
                 po++;
             }
             return -1; 
-        } 
+        }
+
+        /// <summary>
+        /// 找出向量中，所有等於res之位置
+        /// </summary>
+        /// <param name="res"></param>
+        /// <returns></returns>
+        public double[] FindArray(string res)
+        {
+            List<double> RES = new List<double>();
+            double po = 0;
+            foreach (string dd in this.data)
+            {
+                if (dd == res)
+                    RES.Add(po);
+                po++;
+            }
+            if (RES.ToArray().GetLength(0) == 0)
+                return null;
+            return RES.ToArray();
+        }
 
         /// <summary>
         /// 打印
