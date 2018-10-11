@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2026
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZipCompression", "ZipCompression\ZipCompression.csproj", "{CDDFE78E-3A8E-4660-858D-8917F638805F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CDDFE78E-3A8E-4660-858D-8917F638805F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CDDFE78E-3A8E-4660-858D-8917F638805F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CDDFE78E-3A8E-4660-858D-8917F638805F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CDDFE78E-3A8E-4660-858D-8917F638805F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C581B304-3618-4F7A-8A47-8496F9A03116}
+	EndGlobalSection
+EndGlobal
