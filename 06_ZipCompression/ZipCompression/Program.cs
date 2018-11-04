@@ -17,24 +17,30 @@ namespace ZipCompression
             bool flag = getAnacondaPath(ref targetPath);
 
 
-            //if (flag)
-            //{
-            //    string start = targetPath ;
-            //    string Zip = @"C:\Users\Wantai\Desktop\Lib.zip";
-            //    using (Stream stream = File.OpenRead(Zip))
-            //    {
-            //        var reader = ReaderFactory.Open(stream);
-            //        while (reader.MoveToNextEntry())
-            //        {
-            //            if (!reader.Entry.IsDirectory)
-            //            {
-            //                Console.WriteLine(reader.Entry.Key);
-            //                reader.WriteEntryToDirectory(start, new SharpCompress.Common.ExtractionOptions() { ExtractFullPath = true, Overwrite = true });
-            //            }
-            //        }
-            //    }
+            if (flag)
+            {
+                Console.WriteLine("正在解壓縮Python函式庫");
+                string start = targetPath;
+                string Zip = "packages.zip";
+                using (Stream stream = File.OpenRead(Zip))
+                {
+                    var reader = ReaderFactory.Open(stream);
+                    while (reader.MoveToNextEntry())
+                    {
+                        if (!reader.Entry.IsDirectory)
+                        {
+                            Console.WriteLine(reader.Entry.Key);
+                            reader.WriteEntryToDirectory(start, new SharpCompress.Common.ExtractionOptions() { ExtractFullPath = true, Overwrite = true });
+                        }
+                    }
+                }
 
-            //}
+            }
+            else
+            {
+                Console.WriteLine("請先安裝 Anaconda !");
+            }
+
 
 
 
@@ -43,17 +49,15 @@ namespace ZipCompression
         }
         
         private static bool getAnacondaPath(ref string targetPath)
-        {
-            string[] CTARGETS = new string[] { @"C:\Program Files", @"C:\Program Files (x86)", @"C:\Users" };
+        { 
             List<string> Res = new List<string>();
+            Res.Add(@"D:\");
             Res.Add(@"C:\Program Files (x86)");
             Res.Add(@"C:\Users");
             Res.Add(@"C:\Program Files");
-            Res.Add(@"D:\");
-            Res.Add(@"E:\");
 
             bool flag = false;
-            for (int i = 0; i < 3; i++) Res = GetPaths(Res, ref flag);
+            for (int i = 0; i < 5; i++) Res = GetPaths(Res, ref flag);
 
             List<string> anaPath = new List<string>();
             foreach (var ss in Res)
@@ -106,6 +110,12 @@ namespace ZipCompression
             List<string> nRes = new List<string>();
             foreach (string ss in Res)
             {
+
+                if (ss.IndexOf(@"\Local") != -1)
+                {
+                    continue;
+                }
+
                 if (ss.IndexOf("Anaconda") != -1) 
                 {
                     //nRes.Clear();
